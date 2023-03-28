@@ -1,4 +1,4 @@
-![progress-banner](https://codecrafters.io/landing/images/default_progress_banners/docker.png)
+[![progress-banner](https://app.codecrafters.io/progress/docker/dc61444f-e6c8-4b48-a8c0-d17885e09a6e)](https://app.codecrafters.io/users/fwt11)
 
 This is a starting point for Python solutions to the
 ["Build Your Own Docker" Challenge](https://codecrafters.io/challenges/docker).
