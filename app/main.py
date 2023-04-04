@@ -9,7 +9,6 @@ def main():
     # Uncomment this block to pass the first stage
     #
 
-    print(sys.argv)
     command = sys.argv[3]
     args = sys.argv[4:]
     
