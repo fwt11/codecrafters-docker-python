@@ -30,6 +30,7 @@ def main():
         print(completed_process.stdout.decode("utf-8"), file=sys.stdout, end='')
         print(completed_process.stderr.decode("utf-8"), file=sys.stderr, end='')
 
+
     sys.exit(completed_process.returncode)
 
 
