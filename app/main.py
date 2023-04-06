@@ -14,12 +14,9 @@ def main():
 
     command = sys.argv[3]
     args = sys.argv[4:]
-    
-
 
 
     with tempfile.TemporaryDirectory() as temp_dir:
-        print(temp_dir)
         os.chdir(temp_dir)
         os.makedirs("usr/bin")
         os.makedirs("usr/local/bin")
