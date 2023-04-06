@@ -20,7 +20,7 @@ def main():
         os.chdir(temp_dir)
         os.makedirs("usr/bin")
         os.makedirs("usr/local/bin")
-        shutil.copy("/usr/bin/ls", "usr/bin/")
+        #shutil.copy("/usr/bin/ls", "usr/bin/")
         shutil.copy("/usr/local/bin/docker-explorer", "usr/local/bin/")
         os.chroot(".")
         completed_process = subprocess.run([command, *args], capture_output=True)
