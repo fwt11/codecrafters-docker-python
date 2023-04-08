@@ -3,7 +3,10 @@ import sys
 import os
 import tempfile
 import shutil
+from ctypes import *
 
+
+CLONE_NEWPID = 0x20000000
 
 def main():
     # You can use print statements as follows for debugging, they'll be visible when running tests.
@@ -15,8 +18,11 @@ def main():
     command = sys.argv[3]
     args = sys.argv[4:]
 
+    libc = CDLL("libc.so.6")
+
     dirs = ["usr/bin", "usr/local/bin", "lib/x86_64-linux-gnu", "lib64"]
 
+    r = libc.unshare(CLONE_NEWPID)
 
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
@@ -24,12 +30,10 @@ def main():
         for d in dirs:
             os.makedirs(d)
     
-        shutil.copy("/usr/bin/unshare", "usr/bin/")
         shutil.copy("/usr/local/bin/docker-explorer", "usr/local/bin/")
-        shutil.copy("/lib/x86_64-linux-gnu/libc.so.6", "lib/x86_64-linux-gnu/")
-        shutil.copy("/lib64/ld-linux-x86-64.so.2", "lib64/")
+
         os.chroot(".")
-        completed_process = subprocess.run(["/usr/bin/unshare", "--fork", "--pid", command, *args], capture_output=True)
+        completed_process = subprocess.run([command, *args], capture_output=True)
         print(completed_process.stdout.decode("utf-8"), file=sys.stdout, end='')
         print(completed_process.stderr.decode("utf-8"), file=sys.stderr, end='')
 
