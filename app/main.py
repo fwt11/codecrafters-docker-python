@@ -85,6 +85,7 @@ def main():
     # Uncomment this block to pass the first stage
     #
     image = sys.argv[2]
+    print(image)
     image_name, image_ref = image.split(":")
     image_name = f"library/{image_name}"
 
