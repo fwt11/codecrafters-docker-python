@@ -85,8 +85,11 @@ def main():
     # Uncomment this block to pass the first stage
     #
     image = sys.argv[2]
-    print(image)
-    image_name, image_ref = image.split(":")
+    try:
+        image_name, image_ref = image.split(":")
+    except:
+        image_name, image_ref = image, "latest"
+        
     image_name = f"library/{image_name}"
 
     command = sys.argv[3]
