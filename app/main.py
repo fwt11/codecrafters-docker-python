@@ -28,7 +28,6 @@ def get_manifest(name, reference):
             req.add_header("Authorization", f"Bearer {token}")
             req.add_header("Accept", "application/vnd.oci.image.index.v1+json")
             r = request.urlopen(req)
-            print(r)
             j = json.loads(r.read())
             return j
         else:
@@ -42,13 +41,10 @@ def get_manifest(name, reference):
 def pull_layer(name, digest):
     filename = digest.split(":")[1] + ".tar"
     url = f'https://registry.hub.docker.com/v2/{name}/blobs/{digest}'
-    print(f"url: {url}")
     try:
         r = request.urlopen(url)
-        print(r.getcode())
         if r.getcode() == 307:
             url = r.getheader('Location')
-            print(url)
             r = request.urlopen(url)
             with open(filename, 'bw') as f:
                 f.write(r.read())
@@ -113,13 +109,11 @@ def main():
             layers = manifests["manifests"]
             for layer in layers:
                 digest = layer["digest"]
-                print(f"pulling {digest}")
                 pull_layer(image_name, digest)
         else:
             layers = manifests["fsLayers"]
             for layer in layers:
                 digest = layer["blobSum"]
-                print(f"pulling {digest}")
                 pull_layer(image_name, digest)
 
 
