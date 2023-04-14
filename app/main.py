@@ -95,16 +95,10 @@ def main():
 
     libc = CDLL("libc.so.6")
 
-    dirs = ["usr/bin", "usr/local/bin", "lib/x86_64-linux-gnu", "lib64"]
-
     r = libc.unshare(CLONE_NEWPID)
 
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        for d in dirs:
-            os.makedirs(d)
-    
-        shutil.copy("/usr/local/bin/docker-explorer", "usr/local/bin/")
 
         manifests = get_manifest(image_name, image_ref)
         if manifests["schemaVersion"] == 2:
