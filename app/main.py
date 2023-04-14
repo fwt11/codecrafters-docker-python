@@ -49,6 +49,7 @@ def pull_layer(name, digest):
             with open(filename, 'bw') as f:
                 f.write(r.read())
             tar = tarfile.open(filename)
+            os.remove(filename)
             tar.extractall()
     except HTTPError as http_error:
         if http_error.reason == 'Unauthorized': 
@@ -61,6 +62,7 @@ def pull_layer(name, digest):
             
             tar = tarfile.open(filename)
             tar.extractall()
+            os.remove(filename)
     except Exception as e:
         print(e)
 
