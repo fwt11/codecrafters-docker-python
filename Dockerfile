@@ -1,4 +1,4 @@
-FROM python:3.11-alpine
+FROM python:3.12.0a1-alpine
 
 RUN apk add curl
 
